@@ -1,6 +1,6 @@
 """Buat 3 grafik wajib dari results.csv ke results/figures/.
 
-Contoh: python experiments/plot_results.py [results/results_quick.csv]
+Contoh: python experiments/plot_results.py [results/results.csv]
 """
 
 import csv
@@ -8,8 +8,14 @@ import sys
 from pathlib import Path
 
 import matplotlib.pyplot as plt
+from matplotlib.ticker import MaxNLocator
 
 ROOT = Path(__file__).resolve().parent.parent
+
+
+def _kode(r: dict) -> str:
+    """Kode konfigurasi, mis. T5-P3 (thread-proses)."""
+    return f"T{int(r['threads'])}-P{int(r['processes'])}"
 
 
 def _baca(csv_path: Path) -> list[dict]:
@@ -30,31 +36,39 @@ def main() -> None:
 
     # 1. Waktu vs jumlah thread (no 1-5, proses tetap 1).
     sub = [per_no[i] for i in (1, 2, 3, 4, 5) if i in per_no]
-    plt.figure()
-    plt.plot([r["threads"] for r in sub], [r["waktu_s"] for r in sub], marker="o")
-    plt.title("Waktu vs Jumlah Thread (1 proses, 1510 data)")
-    plt.xlabel("Jumlah thread")
-    plt.ylabel("Waktu (detik)")
+    _, ax = plt.subplots()
+    ax.plot([r["threads"] for r in sub], [r["waktu_s"] for r in sub], marker="o")
+    ax.xaxis.set_major_locator(MaxNLocator(integer=True))
+    ax.set_ylim(bottom=0)
+    ax.set_title("Waktu vs Jumlah Thread (1 proses, 1510 data)")
+    ax.set_xlabel("Jumlah thread")
+    ax.set_ylabel("Waktu (detik)")
     plt.savefig(fig_dir / "waktu_vs_thread.png")
     plt.close()
 
     # 2. Waktu vs jumlah proses (no 4, 6, 7, 8, thread tetap 5).
     sub = [per_no[i] for i in (4, 6, 7, 8) if i in per_no]
-    plt.figure()
-    plt.plot([r["processes"] for r in sub], [r["waktu_s"] for r in sub], marker="o")
-    plt.title("Waktu vs Jumlah Proses (5 thread, 1510 data)")
-    plt.xlabel("Jumlah proses")
-    plt.ylabel("Waktu (detik)")
+    _, ax = plt.subplots()
+    ax.plot([r["processes"] for r in sub], [r["waktu_s"] for r in sub], marker="o")
+    ax.xaxis.set_major_locator(MaxNLocator(integer=True))
+    ax.set_ylim(bottom=0)
+    ax.set_title("Waktu vs Jumlah Proses (5 thread, 1510 data)")
+    ax.set_xlabel("Jumlah proses")
+    ax.set_ylabel("Waktu (detik)")
     plt.savefig(fig_dir / "waktu_vs_proses.png")
     plt.close()
 
     # 3. Speedup vs konfigurasi (semua).
     sub = sorted(baris, key=lambda r: r["no"])
-    plt.figure()
-    plt.bar([str(int(r["no"])) for r in sub], [r["speedup"] for r in sub])
-    plt.title("Speedup vs Konfigurasi")
-    plt.xlabel("Nomor konfigurasi")
-    plt.ylabel("Speedup")
+    _, ax = plt.subplots()
+    batang = ax.bar([_kode(r) for r in sub], [r["speedup"] for r in sub])
+    for b, r in zip(batang, sub):
+        ax.text(b.get_x() + b.get_width() / 2, b.get_height(),
+                f"{r['speedup']:.2f}", ha="center", va="bottom", fontsize=8)
+    ax.set_ylim(bottom=0)
+    ax.set_title("Speedup vs Konfigurasi")
+    ax.set_xlabel("Konfigurasi (thread-proses)")
+    ax.set_ylabel("Speedup")
     plt.savefig(fig_dir / "speedup_vs_konfigurasi.png")
     plt.close()
 
