@@ -29,6 +29,7 @@ MU_MIRROR = 5.0
 SIGMA_MIRROR = 0.5
 TIMEOUT_MS = 2000.0
 
-# Beban CPU (dikalibrasi final di tahap 4 agar fase CPU sekuensial ~10-20 dtk).
-CPU_WORK = 800
-BOOTSTRAP_N = 200
+# Beban CPU: CPU_WORK=4000 + BOOTSTRAP_N=300 memberi fase CPU sekuensial
+# ~11 dtk untuk 1510 data (target 10-20 dtk; run dingin pertama bisa lebih lama).
+CPU_WORK = 4000
+BOOTSTRAP_N = 300

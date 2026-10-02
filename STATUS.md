@@ -2,13 +2,12 @@
 
 ## Selesai
 - [x] Tahap 1: struktur folder, `.gitignore`, `requirements.txt`, `README.md` awal.
-- [x] Tahap 3: `server_sim.py` dan `io_phase.py` (sanity 20 data OK, fallback jalan).
+- [x] Tahap 4: `cpu_phase.py` + kalibrasi (`CPU_WORK=4000`, `BOOTSTRAP_N=300`, seq ~11 dtk) + tes kesetaraan lulus.
 
 ## Berjalan
-- [ ] Tahap 4: `cpu_phase.py` + kalibrasi `CPU_WORK`/`BOOTSTRAP_N`.
+- [ ] Tahap 5: `metrics.py`, `pipeline.py`, `main.py`.
 
 ## Belum
-- [ ] Tahap 4: `cpu_phase.py` + kalibrasi `CPU_WORK`/`BOOTSTRAP_N`.
 - [ ] Tahap 5: `metrics.py`, `pipeline.py`, `main.py`.
 - [ ] Tahap 6: `experiments/run_experiments.py` + `results.csv` nyata.
 - [ ] Tahap 7: `experiments/plot_results.py` + 3 grafik.
