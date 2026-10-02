@@ -26,3 +26,6 @@ Thumbs.db
 
 # Hasil mentah per-run (boleh di-commit jika diinginkan, default diabaikan)
 results/raw/*.json
+
+AGENT.MD
+STATUS.MD
