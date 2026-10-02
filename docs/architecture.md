@@ -29,7 +29,10 @@ generator -> io_phase (ThreadPool) -> cpu_phase (ProcessPool) -> metrics
 Peluang gagal utama naik di tengah antrean (30%-70%): 502 sebesar 8% di luar
 dan 25% saat lonjakan; 504 sebesar 5% dan 20%. Mirror gagal ~3%.
 Latensi lognormal (median utama ~244 ms, mirror ~148 ms); request 504
-menunggu sampai `TIMEOUT_MS` = 2000 ms.
+menunggu sampai `TIMEOUT_MS` = 2000 ms. Response time terukur sudah dikali
+`TIME_SCALE` (0.25), jadi merupakan "waktu simulasi terskala", bukan
+waktu dinding mentah. Untuk request fallback, response time adalah jumlah
+waktu percobaan utama + mirror.
 
 ## Hasil run nyata (1510 data, seed 247006111151)
 
@@ -40,6 +43,8 @@ Skala proses (5 thread): 1 proses 50,8 dtk (t_cpu 8,9), 2 proses 49,6 dtk
 fase I/O (~42 dtk), sehingga tambah proses hanya memangkas t_cpu.
 Success rate 99,4%, fallback ke mirror ~24,8%.
 
-Catatan: efisiensi kolom utama memakai rumus soal (speedup/proses), sehingga
-konfigurasi 1 proses menunjukkan >100%. Kolom `efisiensi_total_worker_pct`
-(speedup/total worker) tetap di bawah 100% dan lebih intuitif.
+Catatan: kolom utama `efisiensi_pct` memakai speedup / (thread + proses).
+Rumus contoh soal (speedup / proses) tidak cocok untuk desain hybrid karena
+speedup di sini sebagian besar berasal dari thread I/O, sehingga rumus soal
+menghasilkan >100% (sampai ~600%). Rumus soal dipertahankan sebagai
+pembanding di kolom `efisiensi_per_proses_pct`.

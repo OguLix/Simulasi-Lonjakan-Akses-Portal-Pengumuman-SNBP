@@ -118,14 +118,14 @@ def main() -> None:
         med = _median_rep(hasil_rep)
         sp = metrics.speedup(base[n], med["waktu_s"])
         med["speedup"] = round(sp, 3)
-        med["efisiensi_pct"] = round(metrics.efisiensi(sp, pr), 2)
-        med["efisiensi_total_worker_pct"] = round(
-            metrics.efisiensi_total_worker(sp, th, pr), 2)
+        med["efisiensi_pct"] = round(metrics.efisiensi(sp, th, pr), 2)
+        med["efisiensi_per_proses_pct"] = round(
+            metrics.efisiensi_per_proses(sp, pr), 2)
         baris.append(med)
 
     kolom = ["no", "threads", "processes", "data", "waktu_s", "t_io_s",
              "t_cpu_s", "throughput", "speedup", "efisiensi_pct",
-             "efisiensi_total_worker_pct", "success_rate", "fallback_pct"]
+             "efisiensi_per_proses_pct", "success_rate", "fallback_pct"]
     with open(out_csv, "w", newline="") as f:
         w = csv.DictWriter(f, fieldnames=kolom, extrasaction="ignore")
         w.writeheader()

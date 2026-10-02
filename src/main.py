@@ -19,7 +19,7 @@ def _cetak(hasil: dict, t_total: float, n: int, threads: int, processes: int,
               "Speedup: - | Efficiency: -%")
     else:
         sp = metrics.speedup(t_seq, t_total)
-        ef = metrics.efisiensi(sp, processes)
+        ef = metrics.efisiensi(sp, threads, processes)
         print(f"Total Time: {t_total:.2f} s | Throughput: {tp:.1f} req/s | "
               f"Speedup: {sp:.1f} | Efficiency: {ef:.1f}%")
     print("--- Contoh hasil analisis ---")
