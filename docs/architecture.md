@@ -22,7 +22,8 @@ generator -> io_phase (ThreadPool) -> cpu_phase (ProcessPool) -> metrics
    dengan sekuensial). Agregat menghitung mean/median/p95/p99, success rate,
    distribusi status, fallback %, outlier z-score (|z|>3), dan CI 95%.
 5. `metrics.py`: throughput = data/waktu; speedup = T_seq/T_hybrid (data sama);
-   efisiensi = speedup/proses x 100.
+   efisiensi = speedup/(thread + proses) x 100 (rumus speedup/proses hanya
+   pembanding di kolom `efisiensi_per_proses_pct`).
 
 ## Profil lonjakan
 

@@ -18,7 +18,7 @@ pip install -r requirements.txt
 python -m src.main                                    # default: 5 thread, 3 proses, 1510 data (compare, ~5 mnt)
 python -m src.main --mode hybrid --data 100           # hybrid saja, cepat
 python -m src.main --mode compare --data 100          # hybrid vs sekuensial + speedup riil
-python -m unittest                                    # tes (4 tes)
+python -m unittest                                    # tes (5 tes)
 python experiments/run_experiments.py --quick         # uji plumbing eksperimen
 python experiments/run_experiments.py                 # 10 konfigurasi penuh (~55 mnt)
 python experiments/plot_results.py                    # regenerasi 3 grafik

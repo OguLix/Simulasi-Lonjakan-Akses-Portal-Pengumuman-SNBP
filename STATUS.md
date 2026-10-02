@@ -14,6 +14,7 @@
 - [x] Revisi 2: response time fallback kumulatif (utama+mirror) via `proses_satu` bersama; tes baru lulus (5 tes total).
 - [x] Revisi 3: grafik sumbu bulat, y dari 0, label T-P + nilai speedup per batang.
 - [x] Revisi 4: rerun penuh nyata pasca-revisi (10 cfg + 3 baseline, 3x median, tanpa gagal) -> `results.csv` baru + 3 PNG + README sinkron.
+- [x] Revisi 5: label grafik T-P-D, judul tidak terpotong, README 5 tes, arsitektur poin 5 rumus baru.
 
 ## Berjalan
 - (kosong)
