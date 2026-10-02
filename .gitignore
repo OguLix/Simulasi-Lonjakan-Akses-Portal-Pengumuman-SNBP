@@ -1,0 +1,28 @@
+# Bytecode Python
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtual environment
+.venv/
+venv/
+ENV/
+
+# Distribusi / build
+build/
+dist/
+*.egg-info/
+
+# Pytest / unittest
+.pytest_cache/
+.coverage
+htmlcov/
+
+# Editor / OS
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# Hasil mentah per-run (boleh di-commit jika diinginkan, default diabaikan)
+results/raw/*.json
