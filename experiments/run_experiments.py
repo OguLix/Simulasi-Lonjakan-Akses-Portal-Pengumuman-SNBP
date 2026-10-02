@@ -91,6 +91,7 @@ def main() -> None:
     ukuran_base = [50] if args.quick else [500, 1000, 1510]
     out_csv = ROOT / "results" / ("results_quick.csv" if args.quick else "results.csv")
 
+    print(f"Hybrid Project by: {config.NAMA} ({config.NPM})", flush=True)
     print(f"Baseline sekuensial untuk data {ukuran_base}, {reps}x ulangan", flush=True)
     base = {}
     for n in ukuran_base:
