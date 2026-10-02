@@ -38,3 +38,19 @@ def kirim_request(req: RencanaRequest, ke_mirror: bool = False,
         response_time_ms=(selesai - mulai) * 1000.0,
         fallback=ke_mirror,
     )
+
+
+def proses_satu(req: RencanaRequest,
+                time_scale: float = config.TIME_SCALE) -> HasilRequest:
+    """Kirim ke utama, sekali fallback ke mirror jika gagal.
+
+    Dipakai bersama oleh fase I/O paralel dan run sekuensial. Untuk request
+    yang fallback, response_time_ms adalah JUMLAH kedua percobaan (total yang
+    dirasakan peserta); `status` dan `server` tetap hasil akhir.
+    """
+    pertama = kirim_request(req, ke_mirror=False, time_scale=time_scale)
+    if pertama.status == 200:
+        return pertama
+    kedua = kirim_request(req, ke_mirror=True, time_scale=time_scale)
+    kedua.response_time_ms = pertama.response_time_ms + kedua.response_time_ms
+    return kedua

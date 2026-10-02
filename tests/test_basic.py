@@ -42,5 +42,19 @@ class TestCpuSetara(unittest.TestCase):
             self.assertEqual(seq[kunci], par[kunci], kunci)
 
 
+class TestFallbackKumulatif(unittest.TestCase):
+    def test_fallback_lebih_lama_dari_mirror_saja(self):
+        from src.server_sim import kirim_request, proses_satu
+        rencana = generator.buat_rencana(200, seed=config.SEED)
+        gagal = [r for r in rencana if r.status_utama != 200]
+        self.assertTrue(gagal)
+        for r in gagal[:5]:
+            gab = proses_satu(r, time_scale=0.01)
+            sendiri = kirim_request(r, ke_mirror=True, time_scale=0.01)
+            self.assertTrue(gab.fallback)
+            self.assertEqual(gab.status, r.status_mirror)
+            self.assertGreater(gab.response_time_ms, sendiri.response_time_ms)
+
+
 if __name__ == "__main__":
     unittest.main()
