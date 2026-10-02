@@ -2,12 +2,12 @@
 
 ## Selesai
 - [x] Tahap 1: struktur folder, `.gitignore`, `requirements.txt`, `README.md` awal.
+- [x] Tahap 3: `server_sim.py` dan `io_phase.py` (sanity 20 data OK, fallback jalan).
 
 ## Berjalan
-- [ ] Tahap 2: `config.py` dan `generator.py` (+ tes determinisme).
+- [ ] Tahap 4: `cpu_phase.py` + kalibrasi `CPU_WORK`/`BOOTSTRAP_N`.
 
 ## Belum
-- [ ] Tahap 3: `server_sim.py` dan `io_phase.py`.
 - [ ] Tahap 4: `cpu_phase.py` + kalibrasi `CPU_WORK`/`BOOTSTRAP_N`.
 - [ ] Tahap 5: `metrics.py`, `pipeline.py`, `main.py`.
 - [ ] Tahap 6: `experiments/run_experiments.py` + `results.csv` nyata.
@@ -20,4 +20,5 @@
 
 ## Keputusan
 - `results/raw/*.json` di-ignore via `.gitignore` (mentah per-run tidak wajib di-commit).
-- Nama lengkap untuk output CLI memakai konstanta `NAMA` di `config.py`: "Fadhlan" (lengkap menyusul konfirmasi pemilik).
+- Nama lengkap untuk output CLI memakai konstanta `NAMA` di `config.py`: "Muhammad Fadhlan Aminullah".
+- `.gitignore` mengecualikan `AGENT.md` (tidak di-commit ke repo).
