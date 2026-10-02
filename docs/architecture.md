@@ -36,10 +36,10 @@ waktu percobaan utama + mirror.
 
 ## Hasil run nyata (1510 data, seed 247006111151)
 
-Skala thread (1 proses): 1 thread 224,4 dtk, 2 thread 120,5 dtk,
-3 thread 83,5 dtk, 5 thread 50,8 dtk, 8 thread 36,2 dtk (speedup maks 6,0).
-Skala proses (5 thread): 1 proses 50,8 dtk (t_cpu 8,9), 2 proses 49,6 dtk
-(7,4), 3 proses 46,6 dtk (4,6), 4 proses 45,8 dtk (3,8). Total didominasi
+Skala thread (1 proses): 1 thread 215,4 dtk, 2 thread 112,7 dtk,
+3 thread 77,8 dtk, 5 thread 49,7 dtk, 8 thread 35,2 dtk (speedup maks 6,1).
+Skala proses (5 thread): 1 proses 49,7 dtk (t_cpu 7,8), 2 proses 46,8 dtk
+(4,9), 3 proses 45,3 dtk (3,5), 4 proses 44,8 dtk (3,0). Total didominasi
 fase I/O (~42 dtk), sehingga tambah proses hanya memangkas t_cpu.
 Success rate 99,4%, fallback ke mirror ~24,8%.
 

@@ -10,6 +10,10 @@
 - [x] Tahap 7: `plot_results.py` + 3 PNG di `results/figures/`.
 - [x] Tahap 8: `docs/architecture.md`, `docs/hardware.md`.
 - [x] Tahap 9: `README.md` final.
+- [x] Revisi 1: efisiensi utama = speedup/(thread+proses); rumus lama jadi kolom `efisiensi_per_proses_pct`.
+- [x] Revisi 2: response time fallback kumulatif (utama+mirror) via `proses_satu` bersama; tes baru lulus (5 tes total).
+- [x] Revisi 3: grafik sumbu bulat, y dari 0, label T-P + nilai speedup per batang.
+- [x] Revisi 4: rerun penuh nyata pasca-revisi (10 cfg + 3 baseline, 3x median, tanpa gagal) -> `results.csv` baru + 3 PNG + README sinkron.
 
 ## Berjalan
 - (kosong)
@@ -18,9 +22,8 @@
 - (kosong — semua tahap selesai)
 
 ## Masalah
-- Kalibrasi CPU berisik di mesin uji: run dingin pertama ~2x lebih lambat dari run hangat. Nilai final `CPU_WORK=4000` memberi ~11 dtk steady-state (target 10-20 dtk).
-- Total run didominasi fase I/O (~42 dtk dari ~47 dtk), sehingga skala proses hanya memangkas t_cpu. Dicatat apa adanya.
-- Efisiensi kolom utama (speedup/proses) >100% untuk konfigurasi 1 proses — artefak rumus soal, kolom `efisiensi_total_worker_pct` sebagai pembanding intuitif.
+- Rerun revisi 4: tidak ada run yang gagal (39/39 rep sukses).
+- Total run masih didominasi fase I/O (~42 dtk dari ~45 dtk cfg default).
 
 ## Keputusan
 - `results/raw/*.json` di-ignore via `.gitignore` (mentah per-run tidak wajib di-commit).
@@ -28,3 +31,5 @@
 - `.gitignore` mengecualikan `AGENT.md` (tidak di-commit ke repo).
 - Bootstrap memakai seed per-resample agar hasil paralel identik persis dengan sekuensial (uji kesetaraan exact, bukan aproksimasi).
 - Default `python -m src.main` memakai `--mode compare` agar speedup yang tampil selalu riil.
+- Revisi efisiensi menyimpang dari contoh rumus soal (AGENT.md 5.6) secara sadar; dijelaskan di `docs/architecture.md`.
+- Response time terukur sudah dikali TIME_SCALE (0.25): "waktu simulasi terskala".

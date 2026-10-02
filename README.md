@@ -32,7 +32,7 @@ Opsi CLI: `--threads`, `--processes`, `--data`, `--mirrors`,
 ```
 Hybrid Project by: Muhammad Fadhlan Aminullah (247006111151)
 Threads: 5 | Processes: 3 | Data: 1510
-Total Time: 46.57 s | Throughput: 32.4 req/s | Speedup: 4.7 | Efficiency: 155.4%
+Total Time: 45.33 s | Throughput: 33.3 req/s | Speedup: 4.7 | Efficiency: 59.2%
 --- Contoh hasil analisis ---
 Success rate: 99.4% | Fallback ke mirror: 24.8%
 Response time (ms): mean=... p95=... p99=... | Outlier: ...
@@ -41,6 +41,6 @@ Status: 200=... 502=... 504=...
 
 ## Ringkasan hasil (run nyata, `results/results.csv`)
 
-- Skala thread (1510 data): 224 dtk (1) -> 36 dtk (8 thread), speedup 6,0.
-- Skala proses: t_cpu 8,9 -> 3,8 dtk (1 ke 4 proses); total didominasi I/O.
+- Skala thread (1510 data): 215,4 dtk (1) -> 35,2 dtk (8 thread), speedup 6,1.
+- Skala proses: t_cpu 7,8 -> 3,0 dtk (1 ke 4 proses); total didominasi I/O (~42 dtk).
 - Success rate 99,4%, fallback mirror ~24,8%. Detail: `docs/architecture.md`.
