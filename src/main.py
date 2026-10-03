@@ -1,4 +1,7 @@
-"""CLI simulator: python -m src.main [--mode hybrid|sequential|compare]."""
+"""Nama: Muhammad Fadhlan Aminullah
+NPM: 247006111151
+Kelas: G
+"""
 
 import argparse
 import multiprocessing
@@ -9,7 +12,6 @@ from .pipeline import run_hybrid, run_sequential
 
 def _cetak(hasil: dict, t_total: float, n: int, threads: int, processes: int,
            t_seq: float | None = None) -> None:
-    """Cetak ringkasan run sesuai format wajib soal."""
     tp = metrics.throughput(n, t_total)
     a = hasil
     print(f"Hybrid Project by: {config.NAMA} ({config.NPM})")

@@ -1,4 +1,7 @@
-"""Tes dasar: determinisme generator."""
+"""Nama: Muhammad Fadhlan Aminullah
+NPM: 247006111151
+Kelas: G
+"""
 
 import unittest
 

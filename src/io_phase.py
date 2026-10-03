@@ -1,4 +1,7 @@
-"""Fase I/O: ThreadPoolExecutor untuk simulasi request paralel."""
+"""Nama: Muhammad Fadhlan Aminullah
+NPM: 247006111151
+Kelas: G
+"""
 
 import time
 from concurrent.futures import ThreadPoolExecutor
@@ -11,7 +14,6 @@ from .server_sim import HasilRequest, proses_satu
 
 def fase_io(rencana: list[RencanaRequest], max_workers: int = config.THREADS,
             time_scale: float = config.TIME_SCALE) -> tuple[list[HasilRequest], float]:
-    """Jalankan seluruh rencana via ThreadPool, kembalikan (hasil urut id, t_io)."""
     mulai = time.perf_counter()
     with ThreadPoolExecutor(max_workers=max_workers) as pool:
         hasil = list(pool.map(partial(proses_satu, time_scale=time_scale), rencana))

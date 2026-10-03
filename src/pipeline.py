@@ -1,4 +1,7 @@
-"""Orkestrasi run sekuensial (baseline) dan hybrid (thread + proses)."""
+"""Nama: Muhammad Fadhlan Aminullah
+NPM: 247006111151
+Kelas: G
+"""
 
 import time
 
@@ -13,7 +16,6 @@ def run_sequential(n: int = config.N_DATA, time_scale: float = config.TIME_SCALE
                    seed: int = config.SEED, mirrors: int = config.MIRRORS,
                    cpu_work: int = config.CPU_WORK,
                    bootstrap_n: int = config.BOOTSTRAP_N) -> dict:
-    """Tanpa pool: loop I/O biasa lalu analisis satu proses."""
     rencana = buat_rencana(n, seed=seed, mirrors=mirrors)
     mulai = time.perf_counter()
     log = []
@@ -32,7 +34,6 @@ def run_hybrid(n: int = config.N_DATA, threads: int = config.THREADS,
                time_scale: float = config.TIME_SCALE, seed: int = config.SEED,
                mirrors: int = config.MIRRORS, cpu_work: int = config.CPU_WORK,
                bootstrap_n: int = config.BOOTSTRAP_N) -> dict:
-    """Fase I/O dengan thread, lalu fase CPU dengan proses."""
     rencana = buat_rencana(n, seed=seed, mirrors=mirrors)
     mulai = time.perf_counter()
     log, _ = fase_io(rencana, max_workers=threads, time_scale=time_scale)

@@ -1,4 +1,7 @@
-"""Fase CPU-bound: analisis log paralel dengan ProcessPoolExecutor."""
+"""Nama: Muhammad Fadhlan Aminullah
+NPM: 247006111151
+Kelas: G
+"""
 
 import hashlib
 import random
@@ -11,7 +14,6 @@ from .server_sim import HasilRequest
 
 
 def checksum_chunk(chunk: list[HasilRequest], cpu_work: int) -> dict:
-    """Checksum SHA-256 berulang tiap record (fungsi top-level, bisa di-pickle)."""
     cek_xor = 0
     for r in chunk:
         h = hashlib.sha256(
@@ -30,7 +32,6 @@ def checksum_chunk(chunk: list[HasilRequest], cpu_work: int) -> dict:
 
 
 def bootstrap_parsial(rt: list[float], seed: int, awal: int, akhir: int) -> list[float]:
-    """Rata-rata resample ke-`awal`..`akhir` (seed per resample, partisi-bebas)."""
     n = len(rt)
     rata = []
     for i in range(awal, akhir):
@@ -40,7 +41,6 @@ def bootstrap_parsial(rt: list[float], seed: int, awal: int, akhir: int) -> list
 
 
 def _bagi_chunk(data: list, jumlah: int) -> list[list]:
-    """Bagi data menjadi `jumlah` potongan berukuran hampir sama."""
     jumlah = max(1, min(jumlah, len(data)) if data else 1)
     ukuran, sisa = divmod(len(data), jumlah)
     hasil, awal = [], 0
@@ -52,7 +52,6 @@ def _bagi_chunk(data: list, jumlah: int) -> list[list]:
 
 
 def _bagi_rentang(total: int, jumlah: int) -> list[tuple[int, int]]:
-    """Bagi rentang resample 0..total menjadi `jumlah` bagian."""
     jumlah = max(1, jumlah)
     ukuran, sisa = divmod(total, jumlah)
     hasil, awal = [], 0
@@ -65,7 +64,6 @@ def _bagi_rentang(total: int, jumlah: int) -> list[tuple[int, int]]:
 
 
 def _agregat(hsl_chunk: list[dict], semua_mean: list[float]) -> dict:
-    """Gabung hasil chunk + bootstrap menjadi statistik akhir (deterministik)."""
     rt = sorted(v for b in hsl_chunk for v in b["rt"])
     status = [s for b in hsl_chunk for s in b["status"]]
     fallback = [f for b in hsl_chunk for f in b["fallback"]]
@@ -124,7 +122,6 @@ def _agregat(hsl_chunk: list[dict], semua_mean: list[float]) -> dict:
 def fase_cpu_sekuensial(log: list[HasilRequest], cpu_work: int = config.CPU_WORK,
                         bootstrap_n: int = config.BOOTSTRAP_N,
                         seed: int = config.SEED) -> tuple[dict, float]:
-    """Analisis satu proses (baseline pembanding hasil paralel)."""
     mulai = time.perf_counter()
     bagian = [checksum_chunk(log, cpu_work)]
     rt = bagian[0]["rt"]
@@ -136,7 +133,6 @@ def fase_cpu_paralel(log: list[HasilRequest], processes: int = config.PROCESSES,
                      cpu_work: int = config.CPU_WORK,
                      bootstrap_n: int = config.BOOTSTRAP_N,
                      seed: int = config.SEED) -> tuple[dict, float]:
-    """Analisis dengan ProcessPoolExecutor, hasil gabungan setara sekuensial."""
     potongan = _bagi_chunk(log, processes)
     rentang = _bagi_rentang(bootstrap_n, processes)
     mulai = time.perf_counter()

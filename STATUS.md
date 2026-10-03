@@ -16,6 +16,7 @@
 - [x] Revisi 4: rerun penuh nyata pasca-revisi (10 cfg + 3 baseline, 3x median, tanpa gagal) -> `results.csv` baru + 3 PNG + README sinkron.
 - [x] Revisi 5: label grafik T-P-D, judul tidak terpotong, README 5 tes, arsitektur poin 5 rumus baru.
 - [x] Revisi 6: output run eksperimen diawali Nama + NPM pemilik.
+- [x] Revisi 7: hapus semua komentar dan docstring lama di kode; tiap file beri header Nama/NPM/Kelas (AGENT.md tidak diubah).
 
 ## Berjalan
 - (kosong)

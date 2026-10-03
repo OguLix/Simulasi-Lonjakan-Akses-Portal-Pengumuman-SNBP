@@ -1,6 +1,6 @@
-"""Buat 3 grafik wajib dari results.csv ke results/figures/.
-
-Contoh: python experiments/plot_results.py [results/results.csv]
+"""Nama: Muhammad Fadhlan Aminullah
+NPM: 247006111151
+Kelas: G
 """
 
 import csv
@@ -14,7 +14,6 @@ ROOT = Path(__file__).resolve().parent.parent
 
 
 def _kode(r: dict) -> str:
-    """Kode konfigurasi, mis. T5-P3-D1510 (thread-proses-data)."""
     return f"T{int(r['threads'])}-P{int(r['processes'])}-D{int(r['data'])}"
 
 
@@ -34,7 +33,6 @@ def main() -> None:
     fig_dir = ROOT / "results" / "figures"
     fig_dir.mkdir(parents=True, exist_ok=True)
 
-    # 1. Waktu vs jumlah thread (no 1-5, proses tetap 1).
     sub = [per_no[i] for i in (1, 2, 3, 4, 5) if i in per_no]
     _, ax = plt.subplots()
     ax.plot([r["threads"] for r in sub], [r["waktu_s"] for r in sub], marker="o")
@@ -46,7 +44,6 @@ def main() -> None:
     plt.savefig(fig_dir / "waktu_vs_thread.png")
     plt.close()
 
-    # 2. Waktu vs jumlah proses (no 4, 6, 7, 8, thread tetap 5).
     sub = [per_no[i] for i in (4, 6, 7, 8) if i in per_no]
     _, ax = plt.subplots()
     ax.plot([r["processes"] for r in sub], [r["waktu_s"] for r in sub], marker="o")
@@ -58,7 +55,6 @@ def main() -> None:
     plt.savefig(fig_dir / "waktu_vs_proses.png")
     plt.close()
 
-    # 3. Speedup vs konfigurasi (semua).
     sub = sorted(baris, key=lambda r: r["no"])
     _, ax = plt.subplots()
     batang = ax.bar([_kode(r) for r in sub], [r["speedup"] for r in sub])

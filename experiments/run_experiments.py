@@ -1,8 +1,6 @@
-"""Jalankan 10 konfigurasi + baseline sekuensial, tulis results.csv.
-
-Contoh:
-    python experiments/run_experiments.py --quick   # uji cepat plumbing
-    python experiments/run_experiments.py          # run penuh (~30-45 mnt)
+"""Nama: Muhammad Fadhlan Aminullah
+NPM: 247006111151
+Kelas: G
 """
 
 import argparse
@@ -40,7 +38,6 @@ KONFIGURASI = [
 def _jalan_sekali(no: int, threads: int, processes: int, n: int, rep: int,
                   sekuensial: bool, time_scale: float, cpu_work: int,
                   bootstrap_n: int) -> dict:
-    """Satu run, simpan JSON mentah, kembalikan ringkasannya."""
     if sekuensial:
         run = run_sequential(n=n, time_scale=time_scale, seed=config.SEED,
                              cpu_work=cpu_work, bootstrap_n=bootstrap_n)
@@ -69,7 +66,6 @@ def _jalan_sekali(no: int, threads: int, processes: int, n: int, rep: int,
 
 
 def _median_rep(hasil_rep: list[dict]) -> dict:
-    """Pilih run dengan waktu median (konsisten antar kolom)."""
     waktu = sorted(r["waktu_s"] for r in hasil_rep)
     med = statistics.median(waktu)
     return min(hasil_rep, key=lambda r: abs(r["waktu_s"] - med))

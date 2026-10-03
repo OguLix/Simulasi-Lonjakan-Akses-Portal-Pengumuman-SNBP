@@ -1,4 +1,7 @@
-"""Rencana request deterministik (semua acak di sini, bukan di thread)."""
+"""Nama: Muhammad Fadhlan Aminullah
+NPM: 247006111151
+Kelas: G
+"""
 
 from dataclasses import dataclass
 
@@ -18,7 +21,6 @@ class RencanaRequest:
 
 def buat_rencana(n: int = config.N_DATA, seed: int = config.SEED,
                  mirrors: int = config.MIRRORS) -> list[RencanaRequest]:
-    """Buat N rencana request deterministik dari seed."""
     import random
 
     rng = random.Random(seed)
